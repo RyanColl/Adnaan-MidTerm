@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>COMP 2131 Midterm</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Image generator -->
+    <script type="text/javascript" src="generator.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var gallery = $('#image-gallery');
+
+        for (i = 0; i < 10; i++) {
+          var random = Math.round(Math.random() * 16);
+
+          gallery.append($('<img>').attr('src', 'photo' + random + '.jpg'));
+        }
+        
+        $("button.addG").on("click", function () {
+          let imgTag = $(".image-container img");
+          $(".gallery h2").after($("<img>").attr("src", imgTag.attr("src")))
+        })
+        $("button.addF").on("click", function () {
+          let imgTag = $(".image-container img");
+          $(".featured h2").after($("<img>").attr("src", imgTag.attr("src")))
+          $(".featured h2").next().next().fadeOut();
+        })
+        $("#theme").change("onselect", function () {
+          var selectVal = $("#theme option:selected").val();
+          if(selectVal == "dark") {
+            $("body").attr("id", "body-scroll-dark")
+          }
+          if(selectVal == "light") {
+            $("body").attr("id", "body-scroll-light")
+          }
+        })
+      });
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>COMP 2131 Midterm</h1>
+      </header>
+      <div class="image-generator">
+        <h2>Unsplash Image Generator</h2>
+        <form method="GET">
+          <label>
+            Enter the subject for your new image:
+
+            <input type="text" name="subject" value="" />
+          </label>
+
+          <input type="submit" value="Generate" />
+
+          <button type="button" class="addG">Add to Gallery</button>
+
+          <button type="button" class="addF">Add to Featured</button>
+        </form>
+
+        <div class="image-container">
+          <img
+            src="https://source.unsplash.com/400x250/"
+            alt="Randomly Generated Image"
+          />
+        </div>
+      </div>
+
+      <main>
+        <section class="featured">
+          <h2>Featured Images</h2>
+
+          <img src="images/JPEG/brenda-godinez-227275.jpg" alt="blue latte" />
+          <img src="images/JPEG/matthias-goetzke-103208.jpg" alt="jelly fish" />
+          <img src="images/JPEG/carolyn-v-468210.jpg" alt="coffee" />
+        </section>
+
+        <section class="gallery">
+          <h2>Image Gallery</h2>
+
+          <img
+            src="images/JPEG/alexander-mils-instagram-com-alexandermils-132949.jpg"
+            alt="Ice cap"
+          />
+          <img src="images/JPEG/aquachara-457121.jpg" alt="surfer on beach" />
+          <img src="images/JPEG/brenda-godinez-227275.jpg" alt="blue latte" />
+          <img src="images/JPEG/matthias-goetzke-103208.jpg" alt="jelly fish" />
+          <img src="images/JPEG/carolyn-v-468210.jpg" alt="coffee" />
+          <img src="images/JPEG/dana-critchlow-31563.jpg" alt="fox" />
+          <img src="images/JPEG/denys-nevozhai-351730.jpg" alt="night city" />
+          <img src="images/JPEG/koushik-c-105425.jpg" alt="waterfalls" />
+        </section>
+      </main>
+
+      <nav>
+        <ul>
+          <li><a>Task 1 CSS Grid</a></li>
+          <li><a>Task 2 jQuery</a></li>
+          <li><a>Theme </a> <select id="theme">
+            <option value="">Select</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- end of wrapper -->
+  </body>
+</html>
